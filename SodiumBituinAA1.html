@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sodium Bituin AA1</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Alyssa Bituin">
+        <meta name="description" content="Enter a person's birthday and find out how old the person is. Find out as well if the birthyear was a leap year.">
+        <meta name="keywords" content="birthday, age, leap year">
+        <meta name="revised" content="22-02-2022">
+    </head>
+    <body>
+        <center>
+            <h1>Calculate Age from Birthday<br>and if Birthyear was a Leap Year</h1>
+            <br>
+            
+            <h4>Enter Date of Birth:</h4>
+            <input type=date id="bday">
+            <button type="submit" onclick="calcAgeNowAndLeapYear()">Calculate</button>
+            <p id="message" style="color:red"></p>
+        </center>
+        
+        <script> 
+        function calcAgeNowAndLeapYear() {
+            let userinput = document.getElementById("bday").value;  
+            let bday = new Date(userinput);  
+
+            if(userinput==null || userinput=='') {  
+                document.getElementById("message").innerHTML = "Choose a date";    
+                return false;   
+            } 
+            else {         
+            //find out how old the person is     
+                //calculate month difference from current date in time  
+                let month_diff = Date.now() - bday.getTime();  
+            
+                //convert the calculated difference in date format  
+                let age_dt = new Date(month_diff); 
+            
+                //extract year from date      
+                let year = age_dt.getUTCFullYear();  
+            
+                //calculate the age of the user  
+                let age = Math.abs(year - 1970);  
+            
+                
+
+            //find out if birthyear was a leap year
+                let input = bday.getTime();
+
+                //convert the input in date format  
+                let birthdate = new Date(input); 
+
+                //extract year from date      
+                let birthyear = birthdate.getUTCFullYear();
+
+
+                //calculate if birthyear was a leap year
+                if(birthyear%4==0) {
+                    if (birthyear%100==0) {
+                        if (birthyear%400==0) {
+                            leap="A LEAP YEAR"
+                        }
+                        else{
+                            leap="NOT A LEAP YEAR"
+                        }
+                    }
+                    else{
+                        leap="A LEAP YEAR"
+                    }
+
+                }
+                else {
+                    leap="NOT A LEAP YEAR"
+                }                
+
+            //display the calculated age and if birthyear was a leap year
+            return document.getElementById("result").innerHTML = "The age is " + age + " YEARS.<br>" + "The birthyear is " + leap + ".";
+            }         
+        }
+
+        </script>
+
+        <center>
+            <br><br>
+            <h2 id="result"></h2>
+        </center>
+    </body>
+</html>
